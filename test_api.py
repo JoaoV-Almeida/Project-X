@@ -1,84 +1,84 @@
 #!/usr/bin/env python3
 """
-Teste da API Key do Gemini
+Gemini API Key Test
 """
 import sys
 
-# Carregar API key
+# Load API key
 try:
     import toml
     with open('secrets.toml', 'r') as f:
         secrets = toml.load(f)
     api_key = secrets.get('GEMINI_API_KEY')
-    print(f"✅ API Key carregada: {api_key[:20]}...")
+    print(f"✅ API Key loaded: {api_key[:20]}...")
 except Exception as e:
-    print(f"❌ Erro ao carregar API Key: {e}")
+    print(f"❌ Error loading API Key: {e}")
     sys.exit(1)
 
-# Testar google.genai (novo)
+# Test google.genai (new)
 print("\n" + "="*50)
-print("TESTE 1: google-genai (nova biblioteca)")
+print("TEST 1: google-genai (new library)")
 print("="*50)
 try:
     from google import genai
-    print("✅ google.genai importado com sucesso")
+    print("✅ google.genai imported successfully")
 
     try:
         client = genai.Client(api_key=api_key)
-        print("✅ Cliente criado com sucesso")
+        print("✅ Client created successfully")
 
-        # Testar geração de conteúdo
+        # Test content generation
         test_prompt = "Say 'Hello, I am working!' in one sentence."
-        print(f"\n🧪 Testando com prompt: {test_prompt}")
+        print(f"\n🧪 Testing with prompt: {test_prompt}")
 
         response = client.models.generate_content(
             model="gemini-2.0-flash-exp",
             contents=test_prompt
         )
-        print(f"✅ Resposta recebida: {response.text}")
+        print(f"✅ Response received: {response.text}")
 
     except Exception as e:
-        print(f"❌ Erro ao usar cliente: {type(e).__name__}: {e}")
+        print(f"❌ Error using client: {type(e).__name__}: {e}")
 
 except ImportError as e:
-    print(f"❌ google.genai não instalado: {e}")
+    print(f"❌ google.genai not installed: {e}")
 except Exception as e:
-    print(f"❌ Erro inesperado: {type(e).__name__}: {e}")
+    print(f"❌ Unexpected error: {type(e).__name__}: {e}")
 
-# Testar google.generativeai (antigo)
+# Test google.generativeai (old)
 print("\n" + "="*50)
-print("TESTE 2: google-generativeai (biblioteca antiga)")
+print("TEST 2: google-generativeai (old library)")
 print("="*50)
 try:
     import google.generativeai as genai_old
-    print("✅ google.generativeai importado com sucesso")
+    print("✅ google.generativeai imported successfully")
 
     try:
         genai_old.configure(api_key=api_key)
-        print("✅ API configurada com sucesso")
+        print("✅ API configured successfully")
 
-        # Testar geração de conteúdo
+        # Test content generation
         model = genai_old.GenerativeModel("gemini-2.0-flash-exp")
-        print("✅ Modelo criado com sucesso")
+        print("✅ Model created successfully")
 
         test_prompt = "Say 'Hello, I am working!' in one sentence."
-        print(f"\n🧪 Testando com prompt: {test_prompt}")
+        print(f"\n🧪 Testing with prompt: {test_prompt}")
 
         response = model.generate_content(test_prompt)
-        print(f"✅ Resposta recebida: {response.text}")
+        print(f"✅ Response received: {response.text}")
 
     except Exception as e:
-        print(f"❌ Erro ao usar biblioteca antiga: {type(e).__name__}: {e}")
+        print(f"❌ Error using old library: {type(e).__name__}: {e}")
         import traceback
         traceback.print_exc()
 
 except ImportError as e:
-    print(f"❌ google.generativeai não instalado: {e}")
+    print(f"❌ google.generativeai not installed: {e}")
 except Exception as e:
-    print(f"❌ Erro inesperado: {type(e).__name__}: {e}")
+    print(f"❌ Unexpected error: {type(e).__name__}: {e}")
     import traceback
     traceback.print_exc()
 
 print("\n" + "="*50)
-print("TESTE CONCLUÍDO")
+print("TEST COMPLETED")
 print("="*50)

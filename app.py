@@ -46,8 +46,7 @@ except (FileNotFoundError, KeyError):
 def get_gemini_response_safe(context, api_key):
     """
     Uses 'gemini-1.5-flash' with high temperature for creative/smart roleplay.
-    """
-    # --- CHANGED: Added Config for Creativity ---
+     """
     generation_config = {
         "temperature": 0.8,  # Higher = More personality/creativity
         "top_p": 0.95,
