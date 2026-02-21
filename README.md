@@ -1,4 +1,4 @@
-# Flight Risk AI 🛫
+# Aethra I 🛫
 
 **Predição inteligente de riscos de atraso e cancelamento de voos**
 
