@@ -22,12 +22,14 @@ elif "gemini" in st.secrets and "api_key" in st.secrets["gemini"]:
 if api_key:
     try:
         genai.configure(api_key=api_key)
-        llm_model = genai.GenerativeModel("gemini-1.5-flash") # Using 1.5-flash for better compatibility
+        llm_model = genai.GenerativeModel("gemini-2.5-flash") 
     except Exception as e:
         st.error(f"❌ Error configuring Gemini API: {e}")
         llm_model = None
 else:
-    st.warning("⚠️ Gemini API key not configured in secrets.toml or Streamlit Cloud Secrets. AI Analysis will be disabled.")
+    # Debug info:
+    available_keys = list(st.secrets.to_dict().keys())
+    st.warning(f"⚠️ Gemini API key not found. Available secret keys: {available_keys}")
     llm_model = None
 
 # ------------------------
