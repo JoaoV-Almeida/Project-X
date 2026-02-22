@@ -13,13 +13,22 @@ from personas import PERSONAS
 # ------------------------
 # GEMINI SETUP
 # ------------------------
-try:
-    genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-except KeyError:
-    st.warning("⚠️ Gemini API key not configured. AI Analysis will be disabled.")
+api_key = None
+if "GEMINI_API_KEY" in st.secrets:
+    api_key = st.secrets["GEMINI_API_KEY"]
+elif "gemini" in st.secrets and "api_key" in st.secrets["gemini"]:
+    api_key = st.secrets["gemini"]["api_key"]
 
-
-llm_model = genai.GenerativeModel("gemini-2.5-flash")
+if api_key:
+    try:
+        genai.configure(api_key=api_key)
+        llm_model = genai.GenerativeModel("gemini-1.5-flash") # Using 1.5-flash for better compatibility
+    except Exception as e:
+        st.error(f"❌ Error configuring Gemini API: {e}")
+        llm_model = None
+else:
+    st.warning("⚠️ Gemini API key not configured in secrets.toml or Streamlit Cloud Secrets. AI Analysis will be disabled.")
+    llm_model = None
 
 # ------------------------
 # PAGE CONFIG 
