@@ -1,126 +1,137 @@
-# Aethra I 🛫
+Aethra I 🛫
 
-**Predição inteligente de riscos de atraso e cancelamento de voos**
+Intelligent prediction of flight delay and cancellation risks
 
-Um aplicativo Streamlit que utiliza Machine Learning (XGBoost) e IA Generativa (Google Gemini) para analisar rotas de voo e fornecer recomendações personalizadas baseadas em 10 personas de viajantes.
+A Streamlit application that uses Machine Learning (XGBoost) and Generative AI (Google Gemini) to analyze flight routes and provide personalized recommendations based on 10 traveler personas.
 
-## 🎯 Funcionalidades
+🎯 Features
 
-- **Análise de Risco Preditiva**: Previsão de probabilidade de atraso baseada em padrões históricos de rotas
-- **10 Personas de Viajantes**: Recomendações customizadas (Executivo, Estudante, Aposentado, Turista, Nômade Digital, etc.)
-- **Chatbot IA Integrado**: Assistente conversacional com Google Gemini para orientações personalizadas
-- **Análise de Custo de Oportunidade**: Cálculo do impacto financeiro de atrasos para cada persona
-- **Cotação de Seguros**: Preços dinâmicos baseados no nível de risco
-- **Filtros em Cascata**: Seleção intuitiva de Cidade → Aeroporto de Origem → Destino
-- **391 Aeroportos Reais**: Base de dados completa com nomes de aeroportos dos EUA
+Predictive Risk Analysis: Forecasts delay probability based on historical route patterns
 
-## 🚀 Como Executar
+10 Traveler Personas: Customized recommendations (Executive, Student, Retiree, Tourist, Digital Nomad, etc.)
 
-### Pré-requisitos
-- Python 3.13+
-- Chave API do Google Gemini (configurada em `secrets.toml`)
+Integrated AI Chatbot: Conversational assistant powered by Google Gemini for personalized guidance
 
-### Método 1: Ambiente Virtual Configurado
-```bash
+Opportunity Cost Analysis: Calculates the financial impact of delays for each persona
+
+Insurance Quotes: Dynamic pricing based on risk level
+
+Cascading Filters: Intuitive selection flow — City → Departure Airport → Destination
+
+391 Real Airports: Complete dataset with real U.S. airport names
+
+🚀 How to Run
+Prerequisites
+
+Python 3.13+
+
+Google Gemini API key (configured in secrets.toml)
+
+Method 1: Preconfigured Virtual Environment
 c:/Users/Juliano.jcs/dev/Project-X/.venv/Scripts/python.exe -m streamlit run app.py
-```
-
-### Método 2: Ativando o Ambiente Virtual
-```bash
+Method 2: Activating the Virtual Environment
 # Windows
 .\.venv\Scripts\activate
 
 # Linux/Mac
 source .venv/bin/activate
 
-# Executar aplicação
+# Run application
 streamlit run app.py
-```
-
-### Método 3: Instalação do Zero
-```bash
-# Criar ambiente virtual
+Method 3: Fresh Installation
+# Create virtual environment
 python -m venv .venv
 
-# Ativar ambiente (Windows)
+# Activate environment (Windows)
 .\.venv\Scripts\activate
 
-# Instalar dependências
+# Install dependencies
 pip install -r requirements.txt
 
-# Executar aplicação
+# Run application
 streamlit run app.py
-```
+🔑 Gemini API Configuration
 
-## 🔑 Configuração da API Gemini
+Create a secrets.toml file in the project root:
 
-Crie um arquivo `secrets.toml` na raiz do projeto:
-
-```toml
 [gemini]
-api_key = "sua-chave-api-aqui"
-```
+api_key = "your-api-key-here"
 
-Obtenha sua chave em: https://aistudio.google.com/apikey
+Get your key at: https://aistudio.google.com/apikey
 
-## 📊 Estrutura do Projeto
-
-```
+📊 Project Structure
 Project-X/
-├── app.py                          # Aplicação principal Streamlit
+├── app.py                          # Main Streamlit application
 ├── data/
-│   └── airports.json              # 391 aeroportos com nomes reais
+│   └── airports.json              # 391 airports with real names
 ├── flight_risk_app/
-│   ├── flight_risk_model.json     # Modelo XGBoost treinado
+│   ├── flight_risk_model.json     # Trained XGBoost model
 │   ├── flight_risk_scaler.pkl     # StandardScaler
 │   ├── flight_risk_encodings.pkl  # Label encodings
-│   ├── flight_distance_lookup.pkl # Distâncias entre rotas
-│   └── flight_traffic_stats.pkl   # Estatísticas de tráfego
+│   ├── flight_distance_lookup.pkl # Route distances
+│   └── flight_traffic_stats.pkl   # Traffic statistics
 ├── scripts/
-│   ├── extract_airports.py        # Extração de dados de aeroportos
-│   ├── debug_cities.py            # Testes de filtros de cidade
-│   ├── test_filters.py            # Validação de filtros
-│   └── test_santa_barbara.py      # Testes específicos de rotas
-├── requirements.txt               # Dependências Python
-├── secrets.toml                   # Chave API Gemini (não versionado)
-└── README.md                      # Este arquivo
-```
+│   ├── extract_airports.py        # Airport data extraction
+│   ├── debug_cities.py            # City filter tests
+│   ├── test_filters.py            # Filter validation
+│   └── test_santa_barbara.py      # Specific route tests
+├── requirements.txt               # Python dependencies
+├── secrets.toml                   # Gemini API key (not versioned)
+└── README.md                      # This file
+🧠 Technologies Used
 
-## 🧠 Tecnologias Utilizadas
+Streamlit 1.53.1 — UI framework
 
-- **Streamlit 1.53.1**: Framework de UI
-- **XGBoost 3.1.3**: Modelo de Machine Learning
-- **scikit-learn 1.8.0**: Pré-processamento de dados
-- **Google Generative AI**: Chatbot com Gemini 2.5 Flash
-- **Plotly**: Visualizações interativas
-- **Pandas**: Manipulação de dados
+XGBoost 3.1.3 — Machine learning model
 
-## 🎭 Personas Disponíveis
+scikit-learn 1.8.0 — Data preprocessing
 
-1. **Executive**: Alto valor de tempo, foco em produtividade
-2. **Student**: Orçamento limitado, flexibilidade de agenda
-3. **Parent**: Prioridade em previsibilidade e conforto familiar
-4. **Retiree**: Valoriza conforto, baixa tolerância a estresse
-5. **Tourist**: Busca experiências, médio orçamento
-6. **Digital Nomad**: Alta flexibilidade, trabalha remotamente
-7. **Explorer**: Aventureiro, tolerante a imprevistos
-8. **VIP**: Máximo conforto, disposto a pagar por garantias
-9. **Immigrant**: Viagens essenciais, sensível a custos
-10. **Commuter**: Viagens frequentes, prioriza eficiência
+Google Generative AI — Chatbot using Gemini 2.5 Flash
 
-## 📝 Observações Técnicas
+Plotly — Interactive visualizations
 
-- **Python 3.13**: Totalmente compatível (google-generativeai instalado com sucesso)
-- **Protobuf**: Versão 5.29.5 (downgrade automático de 6.33.4)
-- **sklearn**: Warning de versão (1.6.1 → 1.8.0) é não-bloqueante
-- **Porta Padrão**: http://localhost:8501
-- **Modo de Desenvolvimento**: Hot reload habilitado
+Pandas — Data manipulation
 
-## 🔗 Links Úteis
+🎭 Available Personas
 
-- **Drive do Projeto**: https://drive.google.com/drive/folders/1LoptgYXrfqikYUDppOhGRmC-DARjlwAf
-- **Gemini API**: https://ai.google.dev/gemini-api/docs
+Executive — High time value, productivity-focused
 
-## 📄 Licença
+Student — Limited budget, flexible schedule
 
-Projeto acadêmico/demonstrativo.
+Parent — Prioritizes predictability and family comfort
+
+Retiree — Values comfort, low stress tolerance
+
+Tourist — Seeks experiences, medium budget
+
+Digital Nomad — Highly flexible, works remotely
+
+Explorer — Adventurous, tolerant of setbacks
+
+VIP — Maximum comfort, willing to pay for guarantees
+
+Immigrant — Essential travel, cost-sensitive
+
+Commuter — Frequent traveler, prioritizes efficiency
+
+📝 Technical Notes
+
+Python 3.13: Fully compatible (google-generativeai installed successfully)
+
+Protobuf: Version 5.29.5 (automatic downgrade from 6.33.4)
+
+sklearn: Version warning (1.6.1 → 1.8.0) is non-blocking
+
+Default Port: http://localhost:8501
+
+Development Mode: Hot reload enabled
+
+🔗 Useful Links
+
+Project Drive: https://drive.google.com/drive/folders/1LoptgYXrfqikYUDppOhGRmC-DARjlwAf
+
+Gemini API: https://ai.google.dev/gemini-api/docs
+
+📄 License
+
+Academic/demo project.
